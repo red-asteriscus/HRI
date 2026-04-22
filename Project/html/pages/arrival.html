@@ -13,43 +13,27 @@
 </head>
 <body>
     <div id="wrapper">
-
-        <!-- Gold decorative top bar -->
         <div id="top-bar"></div>
 
-        <!-- Main content card -->
         <div id="container">
-
-            <!-- Event label -->
             <p id="event-label">USEK GRADUATION CEREMONY 2026</p>
-
-            <!-- Divider -->
             <div class="divider"><span>✦</span></div>
 
-            <!-- Section label -->
             <p id="intro-label">Guest &amp; Staff Assistance</p>
 
-            <!-- Main question -->
             <h1 id="question-text">Loading...</h1>
 
-            <!-- Pepper speech subtitle -->
             <p id="pepper-speech" style="display: none;"></p>
 
-            <!-- Seating map -->
             <img id="map-display" src="../pics/seating_map.png" style="display: none;">
-
-            <!-- Divider -->
             <div class="divider"><span>✦</span></div>
 
-            <!-- Buttons -->
             <div id="button-container">
-                <!-- Group 1: Yes/No -->
                 <div id="group-yes-no" class="button-group" style="display: none;">
                     <button class="btn btn-yes" onclick="handleChoice('yesAnswer')">Yes, indeed!</button>
                     <button class="btn btn-no" onclick="handleChoice('noAnswer')">No, thank you</button>
                 </div>
 
-                <!-- Group 2: Role Selection -->
                 <div id="group-role" class="button-group" style="display: none;">
                     <button class="btn btn-staff" onclick="handleChoice('staffAnswer')">I am Staff</button>
                     <button class="btn btn-guest" onclick="handleChoice('guestAnswer')">I am a Guest</button>

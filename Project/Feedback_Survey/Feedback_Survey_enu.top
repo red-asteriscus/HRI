@@ -1,22 +1,15 @@
 topic: ~Feedback_Survey()
 language: enu
 
-# Concepts from your current file [cite: 2]
 concept:(rating) [1 2 3 4 5 "one" "two" "three" "four" "five"]
 concept:(break100) \pau=100\
 concept:(break500) \pau=500\
 
-# 1. Trigger the tablet when the interaction starts [cite: 2]
 u:(e:onStart)
-    $onShowWebview="http://10.10.42.80/apps/project-98b01d/html/pages/feedback.html"
-    $App/ShowSurvey=1
     ^start(animations/Stand/Gestures/Explain_3)
     "How would you rate from 1 to 5, ~break100 the organization and timing ~break100 of today’s ceremony? ~break500 Your feedback helps the university improve." [cite: 2]
 
-# 2. Handle voice input 
 u:(_~rating)
-    $Feedback/VoiceInput=0
-    $Feedback/VoiceInput=$1
     ^start(animations/Stand/Gestures/Nod_1)
     ^first[
         "[$1==1 $1==one $1==2 $1==two] We are sorry to hear that. ~break500 We will try our best to improve. ~break500 Enjoy the celebrations!"
@@ -25,8 +18,6 @@ u:(_~rating)
     ]
     $onStopped=1 
 
-# 3. Handle tablet touch input
-# This responds when the JS raises the "Feedback/TouchInput" event
 u:(e:Feedback/TouchInput)
     ^start(animations/Stand/Gestures/Nod_1)
     ^first[

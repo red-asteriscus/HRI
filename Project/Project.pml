@@ -41,6 +41,11 @@
         <File name="welcome.js" src="html/js/welcome.js" />
         <File name="wlc" src="html/pics/wlc.jpg" />
         <File name="students" src="students.json" />
+        <File name="displayinfo" src="html/js/displayinfo.js" />
+        <File name="jquery" src="html/js/jquery.js" />
+        <File name="qievents" src="html/js/qievents.js" />
+        <File name="confirmation" src="html/pages/confirmation.html" />
+        <File name="displaytext" src="html/pages/displaytext.html" />
     </Resources>
     <Topics>
         <Topic name="welcome_enu" src="welcome/welcome_enu.top" topicName="phase2_welcome" language="en_US" />

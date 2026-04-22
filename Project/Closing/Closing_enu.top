@@ -9,7 +9,6 @@ concept:(break1000) \pau=1000\
 
 # Dialogue Logic
 u:(e:onStart)
-    $onShowWebview="http://198.18.0.1/apps/project-98b01d/html/pages/closing.html"
     ^start(animations/Stand/Gestures/Enthusiastic_3)
     "Congratulations to all our graduates!" ~break1000
     "Before heading out, ~break200 please help us ~break50 by sharing your thoughts ~break50 on today’s event."
