@@ -170,7 +170,7 @@ class MyClass(GeneratedClass):
                 self.logger.warning("Couldn't find tablet service, so can't set application: %s" % appName)
 
         #
-        self.onStopped()]]></content></script><Input name="onLoad" type="1" type_size="1" nature="0" inner="1" tooltip="Signal sent when diagram is loaded." id="1" /><Input name="onStart" type="1" type_size="1" nature="2" inner="0" tooltip="Box behavior starts when a signal is received on this input." id="2" /><Output name="onStopped" type="1" type_size="1" nature="1" inner="0" tooltip="Signal sent when box behavior is finished." id="3" /></Box><Box name="Show Web View (1)" id="7" localization="8" tooltip="Shows the webview (html content) on the tablet.&#x0A;&#x0A;V1.0.0&#x0A;" x="793" y="224"><bitmap>media/images/box/internet/internet.png</bitmap><script language="4"><content><![CDATA[class MyClass(GeneratedClass):
+        self.onStopped()]]></content></script><Input name="onLoad" type="1" type_size="1" nature="0" inner="1" tooltip="Signal sent when diagram is loaded." id="1" /><Input name="onStart" type="1" type_size="1" nature="2" inner="0" tooltip="Box behavior starts when a signal is received on this input." id="2" /><Output name="onStopped" type="1" type_size="1" nature="1" inner="0" tooltip="Signal sent when box behavior is finished." id="3" /></Box><Box name="Show Web View (1)" id="7" localization="8" tooltip="Shows the webview (html content) on the tablet.&#x0A;&#x0A;V1.0.0&#x0A;" x="802" y="229"><bitmap>media/images/box/internet/internet.png</bitmap><script language="4"><content><![CDATA[class MyClass(GeneratedClass):
 
     def __init__(self):
         GeneratedClass.__init__(self)

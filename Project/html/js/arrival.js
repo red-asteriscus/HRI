@@ -1,78 +1,97 @@
-var session = null;
-var activeQuestion = "none";
+var activeQuestion = "ceremony";
 
 var questionMap = {
     "ceremony": "Are you here for the graduation ceremony?",
     "seating": "Do you need help finding your seat?",
     "role": "Are you a staff member or a guest?",
-    "time": "Would you like to know when the ceremony starts?",
-    "none": "Pepper is ready..."
+    "time": "Would you like to know when the ceremony starts?"
 };
 
-var mockResponses = {
-    "ceremony_yes": "Wonderful!",
-    "ceremony_no": "No worries! Have a wonderful day.",
-    "seating_yes": "Of course!",
-    "seating_no": "No problem at all!",
-    "role_staff": "Staff seating is reserved in the VIP section at the front center.",
-    "role_guest": "The White Section is reserved for general seating.",
-    "time_yes": "The ceremony begins in twenty minutes. Enjoy!",
-    "time_no": "Enjoy the ceremony, and congratulations to your graduate!"
+var responseMap = {
+    "ceremony_yesAnswer": "Wonderful!",
+    "ceremony_noAnswer": "No worries! Have a wonderful day.",
+    "seating_yesAnswer": "Of course!",
+    "seating_noAnswer": "No problem at all!",
+    "role_staffAnswer": "Staff seating is reserved in the VIP section at the front center.",
+    "role_guestAnswer": "The White Section is reserved for general seating.",
+    "time_yesAnswer": "The ceremony begins in twenty minutes. Enjoy!",
+    "time_noAnswer": "Enjoy the ceremony, and congratulations to your graduate!"
 };
 
 function getUrlVars() {
     var vars = {};
-    var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m,key,value) {
-        vars[key] = value;
+    window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m, key, value) {
+        vars[key] = decodeURIComponent(value);
     });
     return vars;
 }
 
-function getUrlParam(param, defaultVal){
+function getUrlParam(param, defaultVal) {
     var urlParam = defaultVal;
-
-    if (window.location.href.indexOf(param) > -1) {
+    if (window.location.href.indexOf(param + "=") > -1) {
         urlParam = getUrlVars()[param];
     }
     return urlParam;
 }
 
 function displayPageInformation() {
-    let key = getUrlParam("key", "");
-    document.getElementById("question-text").innerHTML = questionMap[key] || "hello";
+    var key = getUrlParam("key", "ceremony");
+    if (!key) {
+        key = "ceremony";
+    }
+
+    activeQuestion = key;
+
+    var questionEl = document.getElementById("question-text");
+    if (questionEl) {
+        questionEl.innerHTML = questionMap[key] || questionMap["ceremony"];
+    }
 }
 
-/**
- * Display Pepper's response as a subtitle
- */
 function displaySpeech(text) {
     var speechEl = document.getElementById("pepper-speech");
     var mapEl = document.getElementById("map-display");
+
     if (!speechEl) return;
 
     if (!text) {
         speechEl.style.display = "none";
+        if (mapEl) {
+            mapEl.style.display = "none";
+        }
         return;
     }
 
-    console.log("Pepper says: " + text);
-    speechEl.innerText = text;
+    speechEl.innerHTML = text;
     speechEl.style.display = "block";
 
-    // Show map if response is seating-related
-    if (text.toLowerCase().indexOf("section") !== -1 || text.toLowerCase().indexOf("reserved") !== -1 || text.toLowerCase().indexOf("seating") !== -1) {
-        if (mapEl) mapEl.style.display = "block";
+    if (
+        text.toLowerCase().indexOf("section") !== -1 ||
+        text.toLowerCase().indexOf("reserved") !== -1 ||
+        text.toLowerCase().indexOf("seating") !== -1
+    ) {
+        if (mapEl) {
+            mapEl.style.display = "block";
+        }
+    } else {
+        if (mapEl) {
+            mapEl.style.display = "none";
+        }
     }
 }
 
-/**
- * Switch button groups and update text based on dialogue state
- */
 function updateQuestionState() {
-    let key = getUrlParam("key", "");
+    var key = getUrlParam("key", "ceremony");
+    if (!key) {
+        key = "ceremony";
+    }
+
+    activeQuestion = key;
 
     var groupYesNo = document.getElementById("group-yes-no");
     var groupRole = document.getElementById("group-role");
+
+    if (!groupYesNo || !groupRole) return;
 
     groupYesNo.style.display = "none";
     groupRole.style.display = "none";
@@ -84,23 +103,59 @@ function updateQuestionState() {
     }
 }
 
-/**
- * Send choice back to Pepper
- */
+function getNextQuestion(questionKey, eventName) {
+    if (questionKey === "ceremony") {
+        if (eventName === "yesAnswer") return "seating";
+        if (eventName === "noAnswer") return "ceremony";
+    }
 
-function handleChoice(eventName) {
-    if (typeof raiseEvent !== "undefined") {
+    if (questionKey === "seating") {
+        if (eventName === "yesAnswer") return "role";
+        if (eventName === "noAnswer") return "time";
+    }
+
+    if (questionKey === "role") {
+        if (eventName === "staffAnswer" || eventName === "guestAnswer") return "time";
+    }
+
+    if (questionKey === "time") {
+        return "ceremony";
+    }
+
+    return "ceremony";
+}
+
+function setQuestionKey(newKey) {
+    activeQuestion = newKey;
+
+    var basePath = window.location.href.split("?")[0];
+    window.location.href = basePath + "?key=" + encodeURIComponent(newKey);
+}
+
+function onArrivalButton(eventName) {
+    var currentKey = getUrlParam("key", "ceremony");
+    if (!currentKey) {
+        currentKey = "ceremony";
+    }
+
+    if (typeof raiseConfirmationEvent === "function") {
+        raiseConfirmationEvent(eventName);
+    } else if (typeof raiseEvent === "function") {
         raiseEvent(eventName, 1);
     }
+
+    var responseText = responseMap[currentKey + "_" + eventName] || "Thank you!";
+    var nextKey = getNextQuestion(currentKey, eventName);
+
+    displaySpeech(responseText);
+
+    var groupYesNo = document.getElementById("group-yes-no");
+    var groupRole = document.getElementById("group-role");
+
+    if (groupYesNo) groupYesNo.style.display = "none";
+    if (groupRole) groupRole.style.display = "none";
+
+    setTimeout(function () {
+        setQuestionKey(nextKey);
+    }, 1800);
 }
-
-// --- Local Testing Helpers ---
-
-var currentMockIndex = 0;
-var mockStates = ["ceremony", "seating", "role", "time", "none"];
-
-
-function setupLocalTesting() {
-    advanceMockState("none");
-}
-

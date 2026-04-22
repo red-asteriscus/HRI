@@ -1,19 +1,3 @@
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Outfit:wght@300;400;600&display=swap');
-
-:root {
-    --navy:        #1a1a2e;
-    --gold:        #c9a84c;
-    --gold-light:  #e0d5c5;
-    --gold-glow:   rgba(201, 168, 76, 0.35);
-    --grey-mid:    #999;
-    --btn-green:   #2ecc71;
-    --btn-green-h: #27ae60;
-    --btn-red:     #e74c3c;
-    --btn-red-h:   #c0392b;
-    --btn-blue:    #3498db;
-    --btn-amber:   #f39c12;
-}
-
 * {
     box-sizing: border-box;
     margin: 0;
@@ -21,197 +5,132 @@
 }
 
 html, body {
-    width: 100vw;
-    height: 100vh;
+    width: 100%;
+    height: 100%;
     overflow: hidden;
     background-color: #ffffff;
-    font-family: 'Outfit', sans-serif;
-    color: var(--navy);
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    font-family: Arial, sans-serif;
+    color: #1a1a2e;
 }
 
-/* ─── Wrapper ──────────────────────────────────────────── */
+body {
+    display: block;
+}
+
 #wrapper {
     position: relative;
-    width: 100vw;
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    width: 100%;
+    height: 100%;
+    text-align: center;
 }
 
-/* ─── Gold top accent bar ──────────────────────────────── */
 #top-bar {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 3px;
-    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+    background: #c9a84c;
 }
 
-/* ─── Main card ────────────────────────────────────────── */
 #container {
     text-align: center;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 22px;
-    padding: 50px 80px;
-    max-width: 1100px;
     width: 92%;
-    animation: fadeUp 0.8s ease-out both;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 40px 40px;
 }
 
-/* ─── Event label ──────────────────────────────────────── */
 #event-label {
-    font-family: 'Outfit', sans-serif;
-    font-weight: 300;
     font-size: 13px;
-    letter-spacing: 6px;
+    letter-spacing: 4px;
     text-transform: uppercase;
-    color: var(--gold);
+    color: #c9a84c;
+    margin-bottom: 18px;
 }
 
-/* ─── Decorative divider ───────────────────────────────── */
 .divider {
-    display: flex;
-    align-items: center;
-    gap: 14px;
     width: 100%;
-    color: var(--gold);
+    color: #c9a84c;
     font-size: 14px;
-}
-.divider::before,
-.divider::after {
-    content: '';
-    flex: 1;
-    height: 1px;
-    background: var(--gold-light);
+    margin: 18px 0;
 }
 
-/* ─── Sub-label above question ────────────────────────── */
 #intro-label {
     font-size: 13px;
-    font-weight: 400;
-    letter-spacing: 6px;
+    letter-spacing: 4px;
     text-transform: uppercase;
-    color: var(--grey-mid);
+    color: #999999;
+    margin-bottom: 20px;
 }
 
-/* ─── Main question ────────────────────────────────────── */
 #question-text {
-    font-family: 'Playfair Display', serif;
-    font-size: 56px;
-    font-weight: 700;
+    font-family: Georgia, serif;
+    font-size: 48px;
+    font-weight: bold;
     line-height: 1.2;
-    color: var(--navy);
-    letter-spacing: 0.5px;
-    transition: opacity 0.4s ease;
+    color: #1a1a2e;
+    margin-bottom: 25px;
 }
 
-/* ─── Pepper speech subtitle ───────────────────────────── */
 #pepper-speech {
+    display: none;
     font-size: 22px;
-    font-weight: 300;
     font-style: italic;
-    color: var(--grey-mid);
-    letter-spacing: 0.5px;
-    min-height: 28px;
-    animation: fadeUp 0.5s ease-out;
+    color: #999999;
+    margin-bottom: 20px;
 }
 
-/* ─── Seating map ──────────────────────────────────────── */
 #map-display {
+    display: none;
     max-width: 720px;
     max-height: 360px;
     border-radius: 16px;
-    box-shadow: 0 6px 32px rgba(0, 0, 0, 0.1);
-    border: 1px solid var(--gold-light);
-    animation: fadeUp 0.8s ease-out;
+    border: 1px solid #e0d5c5;
+    margin-bottom: 20px;
 }
 
-/* ─── Button container ─────────────────────────────────── */
 #button-container {
     width: 100%;
     display: flex;
     justify-content: center;
+    align-items: center;
 }
 
 .button-group {
-    display: flex;
-    gap: 32px;
+    display: none;
+    width: 100%;
     justify-content: center;
-    flex-wrap: wrap;
+    align-items: center;
+    gap: 24px;
+    text-align: center;
 }
 
-/* ─── Base button ──────────────────────────────────────── */
 .btn {
-    font-family: 'Outfit', sans-serif;
+    font-family: Arial, sans-serif;
     font-size: 22px;
-    font-weight: 600;
-    padding: 22px 60px;
-    border-radius: 50px;
+    font-weight: bold;
+    padding: 20px 40px;
+    border-radius: 30px;
     border: none;
     cursor: pointer;
-    color: #fff;
-    letter-spacing: 0.4px;
-    min-width: 280px;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.12);
-    transition: transform 0.2s, box-shadow 0.2s, background-color 0.2s;
+    color: #ffffff;
+    min-width: 240px;
+    margin: 12px;
 }
 
-.btn:active {
-    transform: scale(0.96);
-}
-
-/* ─── Yes / No ─────────────────────────────────────────── */
 .btn-yes {
-    background-color: var(--btn-green);
-}
-.btn-yes:hover {
-    background-color: var(--btn-green-h);
-    transform: translateY(-2px);
-    box-shadow: 0 8px 28px rgba(46, 204, 113, 0.35);
+    background-color: #2ecc71;
 }
 
 .btn-no {
-    background-color: var(--btn-red);
-}
-.btn-no:hover {
-    background-color: var(--btn-red-h);
-    transform: translateY(-2px);
-    box-shadow: 0 8px 28px rgba(231, 76, 60, 0.3);
+    background-color: #e74c3c;
 }
 
-/* ─── Staff / Guest ────────────────────────────────────── */
 .btn-staff {
-    background-color: var(--navy);
-}
-.btn-staff:hover {
-    background-color: #2e3060;
-    transform: translateY(-2px);
-    box-shadow: 0 8px 28px rgba(26, 26, 46, 0.3);
+    background-color: #1a1a2e;
 }
 
 .btn-guest {
-    background-color: var(--gold);
-}
-.btn-guest:hover {
-    background-color: #b8943f;
-    transform: translateY(-2px);
-    box-shadow: 0 8px 28px var(--gold-glow);
-}
-
-/* ─── Utility ──────────────────────────────────────────── */
-.hidden {
-    display: none !important;
-}
-
-/* ─── Entrance animation ───────────────────────────────── */
-@keyframes fadeUp {
-    from { opacity: 0; transform: translateY(24px); }
-    to   { opacity: 1; transform: translateY(0); }
+    background-color: #c9a84c;
 }

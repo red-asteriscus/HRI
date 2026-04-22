@@ -27,46 +27,56 @@ concept:(break3000) \pau=3000\
 
 u:(e:onStart) ^gotoReactivate(arrival)
 
-# Triggered if someone manually says hello
 u:(~hello) ^start(animations/Stand/Gestures/Hey_1) ~hello ^gotoReactivate(arrival)
 
 # --- Step 1: Greeting & Event Confirmation ---
-proposal: %arrival 
-    ^start(animations/Stand/Gestures/Hey_1) 
+proposal: %arrival
+    ^start(animations/Stand/Gestures/Hey_1)
     Welcome to USEK! I am Pepper. ~break500
     ^start(animations/Stand/Gestures/Explain_1) ~break1000 Are you here for the graduation ceremony? ^wait(animations/Stand/Gestures/Explain_1)
-    u1:(~yes) Wonderful! ~break250 ^gotoReactivate(helpSeat)
-    u1:(~no) No worries! Have a wonderful day. ^start(animations/Stand/Gestures/Bow_1) No worries! Have a wonderful day. ^wait(animations/Stand/Gestures/Bow_1) ~break2000 ^gotoReactivate(arrival)
-    u1:(e:yesAnswer) ^first["$1==yes Wonderful! ^gotoReactivate(helpSeat)" "$1==no No worries! Have a wonderful day. ^gotoReactivate(arrival)"]
-    u1:(e:noAnswer) ^first["$1==yes Wonderful! ^gotoReactivate(helpSeat)" "$1==no No worries! Have a wonderful day. ^gotoReactivate(arrival)"]
+
+    u1:(~yes) Wonderful! ^gotoReactivate(helpSeat)
+    u1:(~no) ^start(animations/Stand/Gestures/Bow_1) No worries! Have a wonderful day. ^wait(animations/Stand/Gestures/Bow_1) ~break2000 ^gotoReactivate(arrival)
+
+    u1:(e:yesAnswer) Wonderful! ^gotoReactivate(helpSeat)
+    u1:(e:noAnswer) ^start(animations/Stand/Gestures/Bow_1) No worries! Have a wonderful day. ^wait(animations/Stand/Gestures/Bow_1) ~break2000 ^gotoReactivate(arrival)
+
     u1:(e:Dialog/NotUnderstood) Sorry, I didn't catch that. Are you here for the graduation? ^sameProposal
 
 # --- Step 2: Seating Offer ---
-proposal: %helpSeat 
+proposal: %helpSeat
     ^start(animations/Stand/Gestures/Explain_4) Do you need help finding your seat? ^wait(animations/Stand/Gestures/Explain_4)
+
     u1:(~yes) Of course! ^gotoReactivate(seatingHelp)
-    u1:(~no) No problem at all! ^start(animations/Stand/Gestures/Bow_1) No problem at all! ~break250 ^wait(animations/Stand/Gestures/Bow_1) ~break2000 ^gotoReactivate(anythingElse)
-    u1:(e:yesAnswer) ^first["$1==yes Of course! ^gotoReactivate(seatingHelp)" "$1==no No problem at all! Enjoy the ceremony. ^gotoReactivate(anythingElse)"]
-    u1:(e:noAnswer) ^first["$1==yes Of course! ^gotoReactivate(seatingHelp)" "$1==no No problem at all! Enjoy the ceremony. ^gotoReactivate(anythingElse)"]
+    u1:(~no) ^start(animations/Stand/Gestures/Bow_1) No problem at all! Enjoy the ceremony. ^wait(animations/Stand/Gestures/Bow_1) ~break2000 ^gotoReactivate(anythingElse)
+
+    u1:(e:yesAnswer) Of course! ^gotoReactivate(seatingHelp)
+    u1:(e:noAnswer) ^start(animations/Stand/Gestures/Bow_1) No problem at all! Enjoy the ceremony. ^wait(animations/Stand/Gestures/Bow_1) ~break2000 ^gotoReactivate(anythingElse)
+
     u1:(e:Dialog/NotUnderstood) Sorry, I couldn't hear that. Do you need help finding your seat? ^sameProposal
 
 # --- Step 3: Role Identification ---
-proposal: %seatingHelp 
+proposal: %seatingHelp
     ^start(animations/Stand/Gestures/Explain_1) Are you a staff member ~break50 or a guest? ^wait(animations/Stand/Gestures/Explain_1)
-    u1:(~staff) Staff seating is reserved in the VIP section at the front center. ^start(animations/Stand/Gestures/ShowSky_3) Staff seating is reserved in the VIP section at the front center. ^gotoReactivate(anythingElse)
-    u1:(~guest) The White Section is reserved for general seating. ^start(animations/Stand/Gestures/Explain_2) The White Section is reserved for general seating. ^gotoReactivate(anythingElse)
-    u1:(e:staffAnswer) ^first["$1==staff Staff seating is reserved... ^gotoReactivate(anythingElse)" "$1==guest The White Section is reserved... ^gotoReactivate(anythingElse)"]
-    u1:(e:guestAnswer) ^first["$1==staff Staff seating is reserved... ^gotoReactivate(anythingElse)" "$1==guest The White Section is reserved... ^gotoReactivate(anythingElse)"]
+
+    u1:(~staff) ^start(animations/Stand/Gestures/ShowSky_3) Staff seating is reserved in the VIP section at the front center. ^wait(animations/Stand/Gestures/ShowSky_3) ^gotoReactivate(anythingElse)
+    u1:(~guest) ^start(animations/Stand/Gestures/Explain_2) The White Section is reserved for general seating. ^wait(animations/Stand/Gestures/Explain_2) ^gotoReactivate(anythingElse)
+
+    u1:(e:staffAnswer) ^start(animations/Stand/Gestures/ShowSky_3) Staff seating is reserved in the VIP section at the front center. ^wait(animations/Stand/Gestures/ShowSky_3) ^gotoReactivate(anythingElse)
+    u1:(e:guestAnswer) ^start(animations/Stand/Gestures/Explain_2) The White Section is reserved for general seating. ^wait(animations/Stand/Gestures/Explain_2) ^gotoReactivate(anythingElse)
+
     u1:(e:Dialog/NotUnderstood) Sorry, are you a staff member or a guest? ^sameProposal
 
 # --- Step 4: Closing ---
-proposal: %anythingElse 
+proposal: %anythingElse
     ^start(animations/Stand/Gestures/PointLeft_1) ~break500 Would you like to know when the ceremony starts? ^wait(animations/Stand/Gestures/PointLeft_1)
-    u1:(~yes) The ceremony begins in twenty minutes. Enjoy! ^start(animations/Stand/Gestures/Explain_3) The ceremony begins in twenty minutes. ~break250 Enjoy! ^wait(animations/Stand/Gestures/Explain_3) ~break2000 ^gotoReactivate(arrival)
-    u1:(~no) Enjoy the ceremony, and congratulations to your graduate! ^start(animations/Stand/Gestures/Bow_1) ~break250 Enjoy the ceremony, ~break250 and congratulations to your graduate! ^wait(animations/Stand/Gestures/Bow_1) ~break2000 ^gotoReactivate(arrival)
-    u1:(e:yesAnswer) ^gotoReactivate(arrival)
-    u1:(e:noAnswer) ^gotoReactivate(arrival)
+
+    u1:(~yes) ^start(animations/Stand/Gestures/Explain_3) The ceremony begins in twenty minutes. Enjoy! ^wait(animations/Stand/Gestures/Explain_3) ~break2000 ^gotoReactivate(arrival)
+    u1:(~no) ^start(animations/Stand/Gestures/Bow_1) Enjoy the ceremony, and congratulations to your graduate! ^wait(animations/Stand/Gestures/Bow_1) ~break2000 ^gotoReactivate(arrival)
+
+    u1:(e:yesAnswer) ^start(animations/Stand/Gestures/Explain_3) The ceremony begins in twenty minutes. Enjoy! ^wait(animations/Stand/Gestures/Explain_3) ~break2000 ^gotoReactivate(arrival)
+    u1:(e:noAnswer) ^start(animations/Stand/Gestures/Bow_1) Enjoy the ceremony, and congratulations to your graduate! ^wait(animations/Stand/Gestures/Bow_1) ~break2000 ^gotoReactivate(arrival)
+
     u1:(e:Dialog/NotUnderstood) I'm sorry, I missed that. Would you like to know when the ceremony starts? ^sameProposal
 
-# --- Flow Control: Only way to exit the behavior ---
 u:(["next segment" "next phase" "move on"]) ^start(animations/Stand/Gestures/Nod_1) Moving on to the next stage. $onStopped=1

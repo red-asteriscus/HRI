@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="user-scalable=no, initial-scale=1.0">
     <title>Arrival Support</title>
+
     <link rel="stylesheet" type="text/css" href="../css/arrival.css">
     <script src="/libs/qi/2/qi.js"></script>
     <script src="../js/jquery.js"></script>
@@ -11,6 +12,7 @@
     <script src="../js/arrival.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Outfit:wght@300;400;600&display=swap" rel="stylesheet">
 </head>
+
 <body>
     <div id="wrapper">
         <div id="top-bar"></div>
@@ -23,28 +25,31 @@
 
             <h1 id="question-text">Loading...</h1>
 
-            <p id="pepper-speech" style="display: none;"></p>
+            <p id="pepper-speech" class="hidden"></p>
 
-            <img id="map-display" src="../pics/seating_map.png" style="display: none;">
+            <img id="map-display" class="hidden" src="../pics/seating_map.png" alt="Seating map">
+
             <div class="divider"><span>✦</span></div>
 
             <div id="button-container">
-                <div id="group-yes-no" class="button-group" style="display: none;">
-                    <button class="btn btn-yes" onclick="handleChoice('yesAnswer')">Yes, indeed!</button>
-                    <button class="btn btn-no" onclick="handleChoice('noAnswer')">No, thank you</button>
+                <div id="group-yes-no" class="button-group hidden">
+                    <button class="btn btn-yes" onclick="onArrivalButton('yesAnswer')">Yes, indeed!</button>
+                    <button class="btn btn-no" onclick="onArrivalButton('noAnswer')">No, thank you</button>
                 </div>
 
-                <div id="group-role" class="button-group" style="display: none;">
-                    <button class="btn btn-staff" onclick="handleChoice('staffAnswer')">I am Staff</button>
-                    <button class="btn btn-guest" onclick="handleChoice('guestAnswer')">I am a Guest</button>
+                <div id="group-role" class="button-group hidden">
+                    <button class="btn btn-staff" onclick="onArrivalButton('staffAnswer')">I am Staff</button>
+                    <button class="btn btn-guest" onclick="onArrivalButton('guestAnswer')">I am a Guest</button>
                 </div>
             </div>
-
         </div>
     </div>
+
     <script type="text/javascript">
-        displayPageInformation();
-        updateQuestionState();
+        window.addEventListener("DOMContentLoaded", function () {
+            displayPageInformation();
+            updateQuestionState();
+        });
     </script>
 </body>
 </html>
