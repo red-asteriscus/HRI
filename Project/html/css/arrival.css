@@ -1,78 +1,139 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Outfit:wght@300;400;600&display=swap');
+
 :root {
-    --primary-green: #2ecc71;
-    --primary-green-hover: #27ae60;
-    --soft-red: #e74c3c;
-    --soft-red-hover: #c0392b;
-    --text-dark: #2c3e50;
-    --shadow: 0 10px 40px rgba(0, 0, 0, 0.08); /* Soft subtle shadow */
+    --navy:        #1a1a2e;
+    --gold:        #c9a84c;
+    --gold-light:  #e0d5c5;
+    --gold-glow:   rgba(201, 168, 76, 0.35);
+    --grey-mid:    #999;
+    --btn-green:   #2ecc71;
+    --btn-green-h: #27ae60;
+    --btn-red:     #e74c3c;
+    --btn-red-h:   #c0392b;
+    --btn-blue:    #3498db;
+    --btn-amber:   #f39c12;
 }
 
 * {
     box-sizing: border-box;
+    margin: 0;
+    padding: 0;
 }
 
 html, body {
-    height: 100%;
-    margin: 0;
-    padding: 0;
+    width: 100vw;
+    height: 100vh;
     overflow: hidden;
-    background-color: #ffffff; /* Clean white background */
+    background-color: #ffffff;
     font-family: 'Outfit', sans-serif;
-    color: var(--text-dark);
+    color: var(--navy);
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
+/* ─── Wrapper ──────────────────────────────────────────── */
 #wrapper {
+    position: relative;
     width: 100vw;
     height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
-    text-align: center;
 }
 
+/* ─── Gold top accent bar ──────────────────────────────── */
+#top-bar {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+}
+
+/* ─── Main card ────────────────────────────────────────── */
 #container {
-    width: 90%;
-    max-width: 1100px;
+    text-align: center;
     display: flex;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
-    gap: 60px;
-    animation: fadeIn 0.8s ease-out;
+    gap: 22px;
+    padding: 50px 80px;
+    max-width: 1100px;
+    width: 92%;
+    animation: fadeUp 0.8s ease-out both;
 }
 
+/* ─── Event label ──────────────────────────────────────── */
+#event-label {
+    font-family: 'Outfit', sans-serif;
+    font-weight: 300;
+    font-size: 13px;
+    letter-spacing: 6px;
+    text-transform: uppercase;
+    color: var(--gold);
+}
+
+/* ─── Decorative divider ───────────────────────────────── */
+.divider {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    width: 100%;
+    color: var(--gold);
+    font-size: 14px;
+}
+.divider::before,
+.divider::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--gold-light);
+}
+
+/* ─── Sub-label above question ────────────────────────── */
+#intro-label {
+    font-size: 13px;
+    font-weight: 400;
+    letter-spacing: 6px;
+    text-transform: uppercase;
+    color: var(--grey-mid);
+}
+
+/* ─── Main question ────────────────────────────────────── */
 #question-text {
-    font-size: 58px;
-    font-weight: 600;
+    font-family: 'Playfair Display', serif;
+    font-size: 56px;
+    font-weight: 700;
     line-height: 1.2;
-    margin: 0;
-    color: var(--text-dark);
-    transition: opacity 0.5s;
+    color: var(--navy);
+    letter-spacing: 0.5px;
+    transition: opacity 0.4s ease;
 }
 
+/* ─── Pepper speech subtitle ───────────────────────────── */
 #pepper-speech {
-    font-size: 44px;
+    font-size: 22px;
+    font-weight: 300;
     font-style: italic;
-    color: #576574; /* Soft slate grey */
-    margin-top: -10px;
-    margin-bottom: 20px;
-    min-height: 52px;
-    animation: fadeIn 0.5s ease-out;
+    color: var(--grey-mid);
+    letter-spacing: 0.5px;
+    min-height: 28px;
+    animation: fadeUp 0.5s ease-out;
 }
 
+/* ─── Seating map ──────────────────────────────────────── */
 #map-display {
-    max-width: 800px;
-    max-height: 400px;
-    border-radius: 20px;
-    box-shadow: 0 4px 30px rgba(0,0,0,0.1);
-    margin: 20px 0;
-    border: 1px solid #eee;
-    animation: fadeIn 0.8s ease-out;
+    max-width: 720px;
+    max-height: 360px;
+    border-radius: 16px;
+    box-shadow: 0 6px 32px rgba(0, 0, 0, 0.1);
+    border: 1px solid var(--gold-light);
+    animation: fadeUp 0.8s ease-out;
 }
 
+/* ─── Button container ─────────────────────────────────── */
 #button-container {
     width: 100%;
     display: flex;
@@ -81,55 +142,76 @@ html, body {
 
 .button-group {
     display: flex;
-    gap: 40px;
+    gap: 32px;
     justify-content: center;
+    flex-wrap: wrap;
 }
 
+/* ─── Base button ──────────────────────────────────────── */
 .btn {
-    font-size: 42px;
+    font-family: 'Outfit', sans-serif;
+    font-size: 22px;
     font-weight: 600;
-    padding: 45px 70px;
-    border-radius: 35px;
+    padding: 22px 60px;
+    border-radius: 50px;
     border: none;
     cursor: pointer;
+    color: #fff;
+    letter-spacing: 0.4px;
+    min-width: 280px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.12);
     transition: transform 0.2s, box-shadow 0.2s, background-color 0.2s;
-    color: white;
-    min-width: 420px;
-    box-shadow: 0 6px 20px rgba(0,0,0,0.1);
 }
 
 .btn:active {
     transform: scale(0.96);
 }
 
-/* Color Themes */
+/* ─── Yes / No ─────────────────────────────────────────── */
 .btn-yes {
-    background-color: var(--primary-green);
+    background-color: var(--btn-green);
 }
 .btn-yes:hover {
-    background-color: var(--primary-green-hover);
+    background-color: var(--btn-green-h);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 28px rgba(46, 204, 113, 0.35);
 }
 
 .btn-no {
-    background-color: var(--soft-red);
+    background-color: var(--btn-red);
 }
 .btn-no:hover {
-    background-color: var(--soft-red-hover);
+    background-color: var(--btn-red-h);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 28px rgba(231, 76, 60, 0.3);
 }
 
+/* ─── Staff / Guest ────────────────────────────────────── */
 .btn-staff {
-    background-color: #3498db; /* Elegant blue */
+    background-color: var(--navy);
 }
-.btn-guest {
-    background-color: #f39c12; /* Warm gold */
+.btn-staff:hover {
+    background-color: #2e3060;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 28px rgba(26, 26, 46, 0.3);
 }
 
-/* Utilities */
+.btn-guest {
+    background-color: var(--gold);
+}
+.btn-guest:hover {
+    background-color: #b8943f;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 28px var(--gold-glow);
+}
+
+/* ─── Utility ──────────────────────────────────────────── */
 .hidden {
     display: none !important;
 }
 
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(30px); }
-    to { opacity: 1; transform: translateY(0); }
+/* ─── Entrance animation ───────────────────────────────── */
+@keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to   { opacity: 1; transform: translateY(0); }
 }
