@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=1280, height=800, user-scalable=no, initial-scale=1.0">
+    <title>Diploma Segment</title>
+    <link rel="stylesheet" href="../css/diploma_segment.css">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Outfit:wght@300;400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div id="wrapper">
+
+        <!-- Gold decorative top bar -->
+        <div id="top-bar"></div>
+
+        <!-- Floating degree badge -->
+        <div id="degree-badge">B.E.</div>
+
+        <!-- Main content card -->
+        <div id="card">
+
+            <!-- University / Event Label -->
+            <p id="event-label">USEK GRADUATION CEREMONY 2026</p>
+
+            <!-- Divider line with star -->
+            <div class="divider"><span>✦</span></div>
+
+            <!-- Section label -->
+            <p id="intro-label">Diploma Conferral</p>
+
+            <!-- Department name -->
+            <h1 id="department-name">Computer Engineering</h1>
+
+            <!-- Graduates subtitle -->
+            <p id="graduates-subtitle">Class of 2026</p>
+
+            <!-- Divider line -->
+            <div class="divider"><span>✦</span></div>
+
+            <!-- Currently graduating name (updated live by list reader cue) -->
+            <div id="name-spotlight">
+                <p id="graduate-name">&nbsp;</p>
+                <p id="graduate-honors">&nbsp;</p>
+            </div>
+
+            <!-- Pepper live subtitles -->
+            <p id="pepper-speech"></p>
+
+        </div>
+
+        <!-- Operator button — bottom right corner -->
+        <button id="next-btn" onclick="goToNext()">Next Segment →</button>
+
+        <!-- Gold decorative bottom bar -->
+        <div id="bottom-bar"></div>
+
+    </div>
+
+    <script src="/libs/qimessaging/1.0/qimessaging.js"></script>
+    <script src="../js/diploma_segment.js"></script>
+</body>
+</html>

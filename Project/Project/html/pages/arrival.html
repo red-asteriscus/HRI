@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=1280, height=800, user-scalable=no, initial-scale=1.0">
+    <title>Arrival Support</title>
+    <link rel="stylesheet" type="text/css" href="../css/arrival.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div id="wrapper">
+        <div id="container">
+            <h1 id="question-text">Loading...</h1>
+            <p id="pepper-speech" style="display: none;"></p>
+            <img id="map-display" src="../pics/seating_map.png" style="display: none;">
+            
+            <div id="button-container">
+                <!-- Group 1: Yes/No -->
+                <div id="group-yes-no" class="button-group" style="display: none;">
+                    <button class="btn btn-yes" onclick="handleChoice('yes')">Yes, indeed!</button>
+                    <button class="btn btn-no" onclick="handleChoice('no')">No, thank you</button>
+                </div>
+
+                <!-- Group 2: Role Selection -->
+                <div id="group-role" class="button-group" style="display: none;">
+                    <button class="btn btn-staff" onclick="handleChoice('staff')">I am Staff</button>
+                    <button class="btn btn-guest" onclick="handleChoice('guest')">I am a Guest</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Pepper Library (Only works on robot) -->
+    <script src="/libs/qimessaging/1.0/qimessaging.js"></script>
+    <script src="../js/arrival.js"></script>
+</body>
+</html>

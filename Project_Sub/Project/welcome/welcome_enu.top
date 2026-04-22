@@ -1,0 +1,45 @@
+topic: ~phase2_welcome()
+language: enu
+
+concept:(hello) [hello hi hey "good morning" greetings]
+concept:(thx) ["thank you" thanks gracias merci]
+concept:(repeat) [repeat "what did you say"]
+concept:(break50) \pau=50\
+concept:(break100) \pau=100\
+concept:(break250) \pau=250\
+concept:(break500) \pau=500\
+concept:(break1000) \pau=1000\
+
+# Dialogue Logic
+u:(e:onStart)
+    $onShowWebview="http://198.18.0.1/apps/project-98b01d/html/pages/welcome.html"
+    $App/DisplayImage="html/pics/suit_picture.png"
+    ^start(animations/Stand/Gestures/ShowFloor_1)
+    "Ladies and gentlemen, ~break250 faculty, ~break250 students ~break250 and families..." ~break500
+    
+    ^start(animations/Stand/Gestures/Joy_1)
+    $App/DisplayImage="html/pics/Graduation_Welcome.jpg"
+    $App/Subtitle="Welcome to the Class of 2026 Graduation Ceremony!"
+    "Welcome to the Class of 2026 ~break250 Graduation Ceremony!" ~break1000
+    
+    $App/Subtitle="I am Pepper, and I am honored to celebrate the Class of 2026."
+    "I am Pepper, ~break250 and I am honored to celebrate ~break50 the Class of 2026." ~break500
+    
+    ^start(animations/Stand/Gestures/Explain_1)
+    $App/Subtitle="Graduates, today is the payoff for all your hard work."
+    "Graduates, ~break100 today is the payoff ~break50 for all your hard work." ~break500
+    
+    $App/Subtitle="You have already proven you have what it takes to succeed."
+    "As you start your next big adventure, ~break250 you have already proven ~break50 you have what it takes to succeed." ~break1000
+    
+    ^start(animations/Stand/Gestures/Enthusiastic_4)
+    $App/Subtitle="Let’s hear it for our graduates!"
+    "It’s time to start the celebration. ~break250 Let’s hear it for our graduates!"
+    ^wait(animations/Stand/Gestures/Enthusiastic_4)
+    $onStopped=1
+
+# Universal Responses
+u:(~repeat) I will repeat the speech for you. ^sameProposal
+
+# Flow Control
+u:(["Pepper next segment" "next phase"]) ^start(animations/Stand/Gestures/Nod_1) Moving to the next segment. $onStopped=1
