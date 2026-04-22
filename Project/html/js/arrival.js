@@ -68,37 +68,18 @@ function displaySpeech(text) {
 /**
  * Switch button groups and update text based on dialogue state
  */
-function updateQuestionState(questionType) {
-    console.log("Dialogue state changed: " + questionType);
-    activeQuestion = questionType;
-    
-    var questionText = document.getElementById("question-text");
-    var speechEl = document.getElementById("pepper-speech");
-    var mapEl = document.getElementById("map-display");
+function updateQuestionState() {
+    let key = getUrlParam("key", "");
+
     var groupYesNo = document.getElementById("group-yes-no");
     var groupRole = document.getElementById("group-role");
 
-    if (!questionText || !groupYesNo || !groupRole) {
-        console.error("Critical UI elements missing!");
-        return;
-    }
-
-    // Reset UI
-    if (speechEl) speechEl.style.display = "none";
-    if (mapEl) mapEl.style.display = "none";
     groupYesNo.style.display = "none";
     groupRole.style.display = "none";
-    
-    questionText.innerText = questionMap[questionType] || "";
 
-    if (!questionType || questionType === "none") {
-        return;
-    }
-
-    // Activate specific group
-    if (["ceremony", "seating", "time"].indexOf(questionType) !== -1) {
+    if (key === "ceremony" || key === "seating" || key === "time") {
         groupYesNo.style.display = "flex";
-    } else if (questionType === "role") {
+    } else if (key === "role") {
         groupRole.style.display = "flex";
     }
 }
@@ -106,10 +87,11 @@ function updateQuestionState(questionType) {
 /**
  * Send choice back to Pepper
  */
+
 function handleChoice(eventName) {
-
-    raiseEvent(eventName, 1);
-
+    if (typeof raiseEvent !== "undefined") {
+        raiseEvent(eventName, 1);
+    }
 }
 
 // --- Local Testing Helpers ---

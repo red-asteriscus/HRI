@@ -25,7 +25,6 @@ concept:(break3000) \pau=3000\
 # Phase 1: The Arrival & Seating
 # ==========================================
 
-# Triggered automatically when the behavior starts
 u:(e:onStart) ^gotoReactivate(arrival)
 
 # Triggered if someone manually says hello
